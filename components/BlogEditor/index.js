@@ -19,33 +19,28 @@ const BlogEditor = ({ post, close, refresh }) => {
   });
 
   const savePost = async () => {
-    if (process.env.NODE_ENV === "development") {
-      await fetch("/api/blog/edit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          slug: post.slug,
-          content: blogContent,
-          variables: blogVariables,
-        }),
-      }).then((data) => {
-        if (data.status === 200) {
-          close();
-          refresh();
-        }
-      });
-    } else {
-      alert("This thing only works in development mode.");
-    }
+    await fetch("/api/blog/edit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        slug: post.slug,
+        content: blogContent,
+        variables: blogVariables,
+      }),
+    }).then((data) => {
+      if (data.status === 200) {
+        close();
+        refresh();
+      }
+    });
   };
 
   return (
     <div
-      className={`fixed z-10 w-screen h-screen overflow-auto top-0 flex flex-col items-center ${
-        theme === "dark" ? "bg-black" : "bg-white"
-      }`}
+      className={`fixed z-10 w-screen h-screen overflow-auto top-0 flex flex-col items-center ${theme === "dark" ? "bg-black" : "bg-white"
+        }`}
     >
       <div className="container my-20">
         <div className="mt-10">

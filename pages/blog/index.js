@@ -29,36 +29,28 @@ const Blog = ({ posts }) => {
   }, []);
 
   const createBlog = () => {
-    if (process.env.NODE_ENV === "development") {
-      fetch("/api/blog", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then(() => {
-        router.reload(window.location.pathname);
-      });
-    } else {
-      alert("This thing only works in development mode.");
-    }
+    fetch("/api/blog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => {
+      router.reload(window.location.pathname);
+    });
   };
 
   const deleteBlog = (slug) => {
-    if (process.env.NODE_ENV === "development") {
-      fetch("/api/blog", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          slug,
-        }),
-      }).then(() => {
-        router.reload(window.location.pathname);
-      });
-    } else {
-      alert("This thing only works in development mode.");
-    }
+    fetch("/api/blog", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        slug,
+      }),
+    }).then(() => {
+      router.reload(window.location.pathname);
+    });
   };
   return (
     showBlog.current && (
@@ -68,9 +60,8 @@ const Blog = ({ posts }) => {
           <title>Blog</title>
         </Head>
         <div
-          className={`container mx-auto mb-10 ${
-            data.showCursor && "cursor-none"
-          }`}
+          className={`container mx-auto mb-10 ${data.showCursor && "cursor-none"
+            }`}
         >
           <Header isBlog={true}></Header>
           <div className="mt-10">
